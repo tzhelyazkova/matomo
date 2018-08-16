@@ -454,6 +454,7 @@ describe("UIIntegrationTest", function () { // TODO: Rename to Piwik?
     // example ui pages
     it('should load the example ui > dataTables page correctly', async function () {
         await page.goto("?" + urlBase + "#?" + generalParams + "&category=ExampleUI_UiFramework&subcategory=ExampleUI_GetTemperaturesDataTable");
+        await page.mouse.move(-10, -10);
 
         pageWrap = await page.$('.pageWrap');
         expect(await pageWrap.screenshot()).to.matchImage('exampleui_dataTables');
