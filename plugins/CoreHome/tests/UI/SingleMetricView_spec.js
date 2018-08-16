@@ -20,18 +20,20 @@ describe('SingleMetricView', function () {
         await page.waitForNetworkIdle();
         await page.click('.dashboard-manager a.title');
 
-        await page.jQuery('.widgetpreview-categorylist>li:contains(Live!)').hover(); // have to mouse move twice... otherwise Live! will just be highlighted
-        await page.jQuery('.widgetpreview-categorylist > li:contains(Generic)').hover();
+        await (await page.jQuery('.widgetpreview-categorylist>li:contains(Live!)')).hover(); // have to mouse move twice... otherwise Live! will just be highlighted
+        await (await page.jQuery('.widgetpreview-categorylist > li:contains(Generic)')).hover();
 
-        await page.jQuery('.widgetpreview-widgetlist li:contains(Metric)').hover();
-        await page.jQuery('.widgetpreview-widgetlist li:contains(Metric)').click();
+        await (await page.jQuery('.widgetpreview-widgetlist li:contains(Metric)')).hover();
+        await (await page.jQuery('.widgetpreview-widgetlist li:contains(Metric)')).click();
+
+        await page.waitForNetworkIdle();
 
         expect(await page.screenshotSelector('#widgetCoreVisualizationssingleMetricViewcolumn')).to.matchImage('loaded');
     });
 
     it('should handle formatted metrics properly', async function () {
-        await page.$('#widgetCoreVisualizationssingleMetricViewcolumn .single-metric-view-picker').hover();
-        await page.jQuery('.jqplot-seriespicker-popover label:contains(Revenue)').click();
+        await (await page.jQuery('#widgetCoreVisualizationssingleMetricViewcolumn .single-metric-view-picker')).hover();
+        await (await page.jQuery('.jqplot-seriespicker-popover label:contains(Revenue)')).click();
 
         expect(await page.screenshotSelector('#widgetCoreVisualizationssingleMetricViewcolumn')).to.matchImage('formatted_metric');
     });
