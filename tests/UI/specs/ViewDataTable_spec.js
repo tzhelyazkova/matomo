@@ -96,6 +96,7 @@ describe("ViewDataTableTest", function () { // TODO: should remove Test suffix f
         await page.click('.dropdownConfigureIcon');
         await page.click('.dataTableFlatten');
         await page.waitForNetworkIdle();
+        await page.mouse.move(-10, -10);
         expect(await page.screenshot({ fullPage: true })).to.matchImage('11_flattened');
     });
 
